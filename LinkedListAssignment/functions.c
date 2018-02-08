@@ -245,6 +245,12 @@ node *sort_list(node *start)
 	return start;
 }
 
+
+/* ADDED FUNCTIONS */
+/*
+ * sortandRemoveDuplicates
+ * Sorts the linked list and then removes any duplicates found
+*/
 node *sortandRemoveDuplicates(node *start)
 {
 	start = sort_list(start);
@@ -254,7 +260,7 @@ node *sortandRemoveDuplicates(node *start)
 
 	while(ptr->next != NULL)
 	{
-		if (ptr->data == ptr->next->data)
+		if (ptr->data == ptr->next->data) // compare current element with next element
 		{
 			printf("Duplicate %d found and removed.\n", ptr->data);
 			if (index != 0)
@@ -264,14 +270,15 @@ node *sortandRemoveDuplicates(node *start)
 				free(ptr);
 				ptr = temp;
 			}
-			else
+			else // if node to be removed is at the beginning
 			{
+				// remove the element by making start->next point to ptr->next, skipping the duplicate (ptr) and free the memory
 				start = ptr->next;
 				free(ptr);
-				ptr = ptr->next;
+				ptr = start; //continue to the next node
 			}
 		}
-		else
+		else //if adjacent elements are not duplicates, continue to the next node
 		{
 			preptr = ptr;
 			ptr = ptr->next; //continue to next node
@@ -281,19 +288,28 @@ node *sortandRemoveDuplicates(node *start)
 	return start;
 }
 
+/*
+ * removeDuplicatesUnsorted
+ * Removes any duplicates found in the linked list without affecting the order.
+ * The elements are removed from the beginning of the list if their dublicate is found.
+*/
 node *removeDuplicatesUnsorted(node *start)
 {
 	node *ptr, *ptr2, *preptr, *temp;
 	ptr = start;
 	int index = 0;
-	while(ptr != NULL && ptr->next != NULL)
+	while(ptr != NULL && ptr->next != NULL) // loop through every element in the list
 	{
 		ptr2 = ptr;
+		/* Loop through every element in the list for each element.
+		 * The total number of loops will n^2, where n is the number
+		 * of elements in the list.
+    */
 		while(ptr2->next != NULL)
 		{
 			if (ptr->data == ptr2->next->data)
 			{
-				printf("Found duplicate %d\n", ptr->data);
+				printf("Found and removed duplicate %d\n", ptr->data);
 
 				if (index != 0)
 				{
@@ -303,7 +319,7 @@ node *removeDuplicatesUnsorted(node *start)
 					free(ptr);
 					ptr=temp;
 				}
-				else
+				else // if duplicate is at the beginning of the list
 				{
 					start = ptr->next;
 					free(ptr);
@@ -321,6 +337,10 @@ node *removeDuplicatesUnsorted(node *start)
 	return start;
 }
 
+/*
+ * multiplyBy10
+ * Multiplies eachs element of the linked list by 10
+*/
 void multiplyBy10(node *start)
 {
 	node *ptr;
@@ -333,6 +353,10 @@ void multiplyBy10(node *start)
 	}
 }
 
+/*
+ * countNonZero
+ * Counts all of the non-zero elements in the list
+*/
 void countNonZero(node *start)
 {
 	node *ptr;
@@ -345,7 +369,7 @@ void countNonZero(node *start)
 			count++;
 		}
 
- 		ptr = ptr -> next;
+ 		ptr = ptr -> next; // continue to next node
 	}
 
 	printf(" There are %d non-zero elements in the linked list.\n", count);
