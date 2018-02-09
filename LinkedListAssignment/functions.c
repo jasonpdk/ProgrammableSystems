@@ -41,7 +41,7 @@ node *create_ll(node *start)
 	return start;
 }
 
-node *display(node *start)
+void display(node *start)
 {
 	node *ptr;
 	ptr = start;
@@ -50,8 +50,6 @@ node *display(node *start)
  		printf("\t %d", ptr -> data);
  		ptr = ptr -> next;
 	}
-
-return start;
 }
 
 node *insert_beg(node *start)
@@ -69,7 +67,7 @@ node *insert_beg(node *start)
 	return start;
 }
 
-node *insert_end(node *start)
+void insert_end(node *start)
 {
 	node *ptr, *new_node;
 	int num;
@@ -83,11 +81,9 @@ node *insert_end(node *start)
 	while(ptr -> next != NULL)
 		ptr = ptr -> next;
 	ptr -> next = new_node;
-
-	return start;
 }
 
-node *insert_before(node *start)
+void insert_before(node *start)
 {
 	node *new_node, *ptr, *preptr;
 	int num, val;
@@ -107,11 +103,9 @@ node *insert_before(node *start)
 
 	preptr -> next = new_node;
 	new_node -> next = ptr;
-
-	return start;
 }
 
-node *insert_after(node *start)
+void insert_after(node *start)
 {
 	node *new_node, *ptr, *preptr;
 	int num, val;
@@ -132,8 +126,6 @@ node *insert_after(node *start)
 
 	preptr -> next=new_node;
 	new_node -> next = ptr;
-
-	return start;
 }
 
 node *delete_beg(node *start)
@@ -147,7 +139,7 @@ node *delete_beg(node *start)
 	return start;
 }
 
-node *delete_end(node *start)
+void delete_end(node *start)
 {
 	node *ptr, *preptr;
 	ptr = start;
@@ -159,8 +151,6 @@ node *delete_end(node *start)
 
 	preptr -> next = NULL;
 	free(ptr);
-
-	return start;
 }
 
 node *delete_node(node *start)
@@ -186,7 +176,7 @@ node *delete_node(node *start)
 	}
 }
 
-node *delete_after(node *start)
+void delete_after(node *start)
 {
 	node *ptr, *preptr;
 	int val;
@@ -203,8 +193,6 @@ node *delete_after(node *start)
 
 	preptr -> next=ptr -> next;
 	free(ptr);
-
-	return start;
 }
 
 node *delete_list(node *start)
@@ -223,7 +211,7 @@ node *delete_list(node *start)
 return start;
 }
 
-node *sort_list(node *start)
+void sort_list(node *start)
 {
 	node *ptr1, *ptr2;
 	int temp;
@@ -241,8 +229,6 @@ node *sort_list(node *start)
  		}
  	ptr1 = ptr1 -> next;
  	}
-
-	return start;
 }
 
 
@@ -253,7 +239,7 @@ node *sort_list(node *start)
 */
 node *sortandRemoveDuplicates(node *start)
 {
-	start = sort_list(start);
+	sort_list(start);
 	node *ptr, *preptr, *temp;
 	ptr = start;
 	int index = 0;
