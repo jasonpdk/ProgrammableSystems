@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+//#include <bool.h>
 #include "CRUDLinkedList.h"
 
 
@@ -47,7 +48,7 @@ void display(node *start)
 	ptr = start;
 
 	while(ptr != NULL) {
- 		printf("\t %d", ptr -> data);
+ 		printf("%d\t", ptr -> data);
  		ptr = ptr -> next;
 	}
 }
@@ -277,13 +278,13 @@ node *sortandRemoveDuplicates(node *start)
 /*
  * removeDuplicatesUnsorted
  * Removes any duplicates found in the linked list without affecting the order.
- * The elements are removed from the beginning of the list if their dublicate is found.
+ * The elements are removed from the end of the list if their duplicate is found.
 */
+
 node *removeDuplicatesUnsorted(node *start)
 {
-	node *ptr, *ptr2, *preptr, *temp;
+	node *ptr, *ptr2;
 	ptr = start;
-	int index = 0;
 	while(ptr != NULL && ptr->next != NULL) // loop through every element in the list
 	{
 		ptr2 = ptr;
@@ -291,33 +292,21 @@ node *removeDuplicatesUnsorted(node *start)
 		 * The total number of loops will n^2, where n is the number
 		 * of elements in the list.
     */
+
 		while(ptr2->next != NULL)
 		{
 			if (ptr->data == ptr2->next->data)
 			{
 				printf("Found and removed duplicate %d\n", ptr->data);
-
-				if (index != 0)
-				{
-					// remove
-					preptr->next=ptr->next;
-					temp = ptr->next;
-					free(ptr);
-					ptr=temp;
-				}
-				else // if duplicate is at the beginning of the list
-				{
-					start = ptr->next;
-					free(ptr);
-					ptr = ptr->next;
-				}
+				free(ptr2->next);
+				ptr2->next=ptr2->next->next;
 			}
-			ptr2 = ptr2->next;
-
+			else
+			{
+				ptr2 = ptr2->next;
+			}
 		}
-		preptr = ptr;
 		ptr = ptr->next;
-		index++;
 	}
 
 	return start;

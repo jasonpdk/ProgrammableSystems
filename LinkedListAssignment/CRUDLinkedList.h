@@ -27,3 +27,5 @@ node *sortandRemoveDuplicates(node*);
 node *removeDuplicatesUnsorted(node*);
 void multiplyBy10(node*);
 void countNonZero(node *start);
+
+node *removeDuplicatesUnsorted2(node *);
